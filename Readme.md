@@ -482,7 +482,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ## 👥 Authors & Acknowledgments
 
 - **Diti Mehta** — Project Lead & Developer
-- **Vishwajeet Bharadwaj** — Developer and Beta Tester
+- **Vishwajeet Bharadwaj** — Developer
 - Community contributors and beta testers
 
 ## 📞 Support & Contact
