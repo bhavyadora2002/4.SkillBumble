@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { LayoutDashboard, RefreshCw, LogOut, Sparkles } from "lucide-react";
+import { LayoutDashboard, RefreshCw, CreditCard, LogOut, Sparkles } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -29,6 +29,10 @@ export default function Navbar() {
           <Link to="/give-take" className={loc.pathname.startsWith("/give-take") ? "active-link" : ""}>
             <RefreshCw size={16} />
             Give &amp; Take
+          </Link>
+          <Link to="/enrollment" className={loc.pathname.startsWith("/enrollment") ? "active-link" : ""}>
+            <CreditCard size={16} />
+            Credit Enrollment
           </Link>
         </div>
         <div className="navbar-right">

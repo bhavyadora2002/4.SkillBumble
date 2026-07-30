@@ -7,6 +7,7 @@ import DashboardPage from "./pages/DashboardPage";
 import GiveTakePage from "./pages/GiveTakePage";
 import CreatePostPage from "./pages/CreatePostPage";
 import UserProfilePage from "./pages/UserProfilePage";
+import EnrollmentPage from "./pages/EnrollmentPage";
 
 function ProtectedRoute({ children }) {
   const { token } = useAuth();
@@ -51,6 +52,15 @@ export default function App() {
           <ProtectedRoute>
             <Navbar />
             <UserProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/enrollment"
+        element={
+          <ProtectedRoute>
+            <Navbar />
+            <EnrollmentPage />
           </ProtectedRoute>
         }
       />

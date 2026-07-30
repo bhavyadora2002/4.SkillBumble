@@ -9,6 +9,7 @@ from src.routes.skills_routes import skills_bp
 from src.routes.give_take_routes import give_take_bp
 from src.routes.match_routes import match_bp
 from src.routes.user_routes import user_bp
+from src.routes.enrollment_routes import enrollment_bp
 
 
 def create_app():
@@ -24,6 +25,7 @@ def create_app():
     app.register_blueprint(give_take_bp)
     app.register_blueprint(match_bp)
     app.register_blueprint(user_bp)
+    app.register_blueprint(enrollment_bp)
 
     @app.route("/api/health")
     def health():
