@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import SkillPicker from "../components/SkillPicker";
+import { UserPlus, User, Mail, Lock, FileText, Video, AlertCircle } from "lucide-react";
 
 export default function SignupPage() {
   const { signup } = useAuth();
@@ -29,10 +30,7 @@ export default function SignupPage() {
     setSubmitting(true);
     try {
       await signup({
-        name,
-        email,
-        password,
-        bio,
+        name, email, password, bio,
         meeting_link: meetingLink,
         skills: skills.map(({ skill_name, ...rest }) => rest),
       });
@@ -45,80 +43,57 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="page">
-      <div className="card card--wide">
-        <h1>Create your SkillBumble account</h1>
+    <div className="page page--narrow">
+      <div className="card">
+        <h1 style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+          <UserPlus size={22} /> Sign up
+        </h1>
         <p className="subtitle">Tell us what you can teach and what you want to learn.</p>
 
-        {error && <div className="error-banner">{error}</div>}
+        {error && <div className="error-banner"><AlertCircle size={15} /> {error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="field">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name"><User size={13} /> Name</label>
             <input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
           </div>
 
           <div className="field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <label htmlFor="email"><Mail size={13} /> Email</label>
+            <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
 
-          <div className="row">
+          <div className="field--row">
             <div className="field">
-              <label htmlFor="password">Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+              <label htmlFor="password"><Lock size={13} /> Password</label>
+              <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
             </div>
             <div className="field">
-              <label htmlFor="confirmPassword">Confirm password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+              <label htmlFor="confirmPassword"><Lock size={13} /> Confirm</label>
+              <input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
             </div>
           </div>
 
           <div className="field">
-            <label htmlFor="bio">Bio</label>
-            <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
+            <label htmlFor="bio"><FileText size={13} /> Bio</label>
+            <textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Tell others about yourself..." />
           </div>
 
           <div className="field">
-            <label htmlFor="meetingLink">Meeting link</label>
-            <input
-              id="meetingLink"
-              placeholder="https://meet.jit.si/your-room"
-              value={meetingLink}
-              onChange={(e) => setMeetingLink(e.target.value)}
-              required
-            />
+            <label htmlFor="meetingLink"><Video size={13} /> Meeting link</label>
+            <input id="meetingLink" placeholder="https://meet.jit.si/your-room" value={meetingLink} onChange={(e) => setMeetingLink(e.target.value)} required />
           </div>
 
-          <div className="skill-section">
-            <h2>Your skills</h2>
-            <p className="subtitle">Add anything you can teach and anything you'd like to learn.</p>
+          <div className="section" style={{ marginTop: 24 }}>
+            <div className="section-header">
+              <h2>Your skills</h2>
+            </div>
             <SkillPicker skills={skills} onChange={setSkills} />
           </div>
 
-          <div style={{ marginTop: 24 }}>
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
-              {submitting ? "Creating account..." : "Sign up"}
-            </button>
-          </div>
+          <button type="submit" className="btn btn-primary btn-block" style={{ marginTop: 24 }} disabled={submitting}>
+            {submitting ? "Creating account..." : "Sign up"}
+          </button>
         </form>
 
         <p className="footer-link">

@@ -72,8 +72,13 @@ INSERT INTO matches (match_id, user1_id, user2_id, skill_from_user1_id, skill_fr
 -- ---------------------------------------------------------------------------
 SET @post_python = 'd4000000-0000-4000-8000-000000000001';
 
-INSERT INTO posts (post_id, user_id, skill_id, title, description, status) VALUES
-(@post_python, @marcus, @sk_python, 'Python Basics Group Session', 'Weekly group session covering Python fundamentals for beginners, bring your own project ideas.', 'active');
+INSERT INTO posts (post_id, user_id, skill_id, type, proficiency_level, title, description, status) VALUES
+(@post_python, @marcus, @sk_python, 'teach', 'expert', 'Python Basics Group Session', 'Weekly group session covering Python fundamentals for beginners, bring your own project ideas.', 'open');
+
+SET @post_figma = 'd4000000-0000-4000-8000-000000000002';
+
+INSERT INTO posts (post_id, user_id, skill_id, type, proficiency_level, title, description, status) VALUES
+(@post_figma, @priya, @sk_figma, 'teach', 'expert', 'Learn Figma - UI Design Basics', 'I can teach you Figma, from auto-layout to components. Looking to learn Python in return.', 'open');
 
 -- ---------------------------------------------------------------------------
 -- sessions

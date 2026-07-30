@@ -1,7 +1,12 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
+function getToken() {
+  return localStorage.getItem("token");
+}
+
 async function request(path, { method = "GET", body, token } = {}) {
   const headers = { "Content-Type": "application/json" };
+  token = token || getToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const response = await fetch(`${BASE_URL}${path}`, {
@@ -18,6 +23,8 @@ async function request(path, { method = "GET", body, token } = {}) {
 
   return data;
 }
+
+export { request };
 
 export const api = {
   signup: (payload) => request("/auth/signup", { method: "POST", body: payload }),

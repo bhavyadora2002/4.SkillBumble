@@ -78,14 +78,16 @@ CREATE TABLE user_skills (
 -- posts  (EarnCredits mode: one teacher, many learners)
 -- ---------------------------------------------------------------------------
 CREATE TABLE posts (
-  post_id      CHAR(36)     NOT NULL DEFAULT (UUID()) PRIMARY KEY,
-  user_id      CHAR(36)     NOT NULL,
-  skill_id     CHAR(36)     NOT NULL,
-  title        VARCHAR(255) NOT NULL,
-  description  TEXT NULL,
-  status       ENUM('active','completed','cancelled') NOT NULL DEFAULT 'active',
-  created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  post_id            CHAR(36)     NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+  user_id            CHAR(36)     NOT NULL,
+  skill_id           CHAR(36)     NOT NULL,
+  type               ENUM('teach','learn') NOT NULL,
+  proficiency_level  ENUM('beginner','intermediate','advanced','expert') NOT NULL DEFAULT 'beginner',
+  title              VARCHAR(255) NOT NULL,
+  description        TEXT NULL,
+  status             ENUM('open','matched','closed') NOT NULL DEFAULT 'open',
+  created_at         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT fk_posts_user  FOREIGN KEY (user_id)  REFERENCES users(user_id)   ON DELETE CASCADE,
   CONSTRAINT fk_posts_skill FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
@@ -95,6 +97,7 @@ CREATE TABLE posts (
 -- ---------------------------------------------------------------------------
 CREATE TABLE matches (
   match_id              CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
+  post_id               CHAR(36) NULL,
   user1_id              CHAR(36) NOT NULL,
   user2_id              CHAR(36) NOT NULL,
   skill_from_user1_id   CHAR(36) NOT NULL,
@@ -105,8 +108,9 @@ CREATE TABLE matches (
   completed_at          TIMESTAMP NULL,
   CONSTRAINT fk_matches_user1  FOREIGN KEY (user1_id) REFERENCES users(user_id) ON DELETE CASCADE,
   CONSTRAINT fk_matches_user2  FOREIGN KEY (user2_id) REFERENCES users(user_id) ON DELETE CASCADE,
-  CONSTRAINT fk_matches_skill1 FOREIGN KEY (skill_from_user1_id) REFERENCES skills(skill_id) ON DELETE RESTRICT,
-  CONSTRAINT fk_matches_skill2 FOREIGN KEY (skill_from_user2_id) REFERENCES skills(skill_id) ON DELETE RESTRICT,
+  CONSTRAINT fk_matches_post   FOREIGN KEY (post_id)            REFERENCES posts(post_id)      ON DELETE SET NULL,
+  CONSTRAINT fk_matches_skill1 FOREIGN KEY (skill_from_user1_id) REFERENCES skills(skill_id)   ON DELETE RESTRICT,
+  CONSTRAINT fk_matches_skill2 FOREIGN KEY (skill_from_user2_id) REFERENCES skills(skill_id)   ON DELETE RESTRICT,
   CHECK (user1_id <> user2_id)
 ) ENGINE=InnoDB;
 

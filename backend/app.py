@@ -6,6 +6,9 @@ from src.config import Config
 from src.controllers.auth_controller import bcrypt
 from src.routes.auth_routes import auth_bp
 from src.routes.skills_routes import skills_bp
+from src.routes.give_take_routes import give_take_bp
+from src.routes.match_routes import match_bp
+from src.routes.user_routes import user_bp
 
 
 def create_app():
@@ -18,6 +21,9 @@ def create_app():
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(skills_bp)
+    app.register_blueprint(give_take_bp)
+    app.register_blueprint(match_bp)
+    app.register_blueprint(user_bp)
 
     @app.route("/api/health")
     def health():
