@@ -1,0 +1,26 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 142-610-188
+127.0.0.1 - - [30/Jul/2026 06:38:14] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:38:14] "GET /api/skills HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:38:23] "POST /api/auth/signup HTTP/1.1" 201 -
+127.0.0.1 - - [30/Jul/2026 06:38:40] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:38:41] "POST /api/auth/signup HTTP/1.1" 409 -
+127.0.0.1 - - [30/Jul/2026 06:38:48] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:38:49] "GET /api/auth/me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:44:01] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:46:04] "GET /api/skills HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:46:21] "POST /api/auth/signup HTTP/1.1" 201 -
+127.0.0.1 - - [30/Jul/2026 06:46:30] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jul/2026 06:46:31] "POST /api/auth/signup HTTP/1.1" 409 -
+ * Detected change in 'C:\\Users\\Administrator\\Desktop\\MiniProject\\4.SkillBumble\\backend\\src\\routes\\auth_routes.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\MiniProject\4.SkillBumble\backend\app.py", line 6, in <module>
+    from src.routes.auth_routes import auth_bp, bcrypt
+ImportError: cannot import name 'bcrypt' from 'src.routes.auth_routes' (C:\Users\Administrator\Desktop\MiniProject\4.SkillBumble\backend\src\routes\auth_routes.py)
